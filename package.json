@@ -1,0 +1,30 @@
+{
+  "name": "next-safejs",
+  "version": "1.0.0",
+  "description": "🔒 Next-safejs provides various methods to secure your Nextjs applications",
+  "main": "src/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KyuManagement/next-safejs.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "jose",
+    "jwt",
+    "next",
+    "nextjs",
+    "react",
+    "reactjs"
+  ],
+  "author": {
+    "name": "KSJaay",
+    "email": "KSJaay@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KyuManagement/next-safejs/issues"
+  },
+  "homepage": "https://github.com/KyuManagement/next-safejs#readme"
+}
