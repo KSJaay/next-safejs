@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "🔒 Next-safejs provides various methods to secure your Nextjs applications",
   "main": "src/index.js",
-  "scripts": {},
+  "scripts": {
+    "watch": "npx nodemon",
+    "build": "rimraf ./build && tsc"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KyuManagement/next-safejs.git"
@@ -26,5 +29,12 @@
   "bugs": {
     "url": "https://github.com/KyuManagement/next-safejs/issues"
   },
-  "homepage": "https://github.com/KyuManagement/next-safejs#readme"
+  "homepage": "https://github.com/KyuManagement/next-safejs#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "nodemon": "^2.0.22",
+    "rimraf": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
 }
