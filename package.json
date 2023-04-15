@@ -2,10 +2,13 @@
   "name": "next-safejs",
   "version": "1.0.0",
   "description": "🔒 Next-safejs provides various methods to secure your Nextjs applications",
-  "main": "src/index.js",
+  "source": "src/index.ts",
+  "main": "lib/index.js",
   "scripts": {
-    "watch": "npx nodemon",
-    "build": "rimraf ./build && tsc"
+    "clean": "rimraf ./dist",
+    "build": "rimraf ./dist && tsc",
+    "build:watch": "rimraf ./dist && tsc -w",
+    "watch": "npx nodemon"
   },
   "repository": {
     "type": "git",
