@@ -1,5 +1,5 @@
 import {
-  CookeOptions,
+  cookieOptions,
   getCookie,
   getCookieKeys,
   getCookies,
@@ -11,7 +11,7 @@ import {
 } from "./cookie";
 
 export {
-  CookeOptions,
+  cookieOptions,
   getCookie,
   getCookieKeys,
   getCookies,
@@ -24,7 +24,7 @@ export {
 
 export default {
   cookie: {
-    CookeOptions,
+    cookieOptions,
     getCookie,
     getCookieKeys,
     getCookies,
