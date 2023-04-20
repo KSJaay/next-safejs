@@ -2,7 +2,7 @@ import {IncomingMessage} from "http";
 import {isClientSide} from "./utils";
 
 export function parseCookies(cookies: string) {
-  const cookiesArray = cookies.split(";");
+  const cookiesArray = cookies.split("; ") || [];
 
   const cookiesObject: {
     [key: string]: any;
@@ -20,7 +20,7 @@ export function parseCookies(cookies: string) {
   return cookiesObject;
 }
 
-function getCookies(request: IncomingMessage | undefined) {
+function getCookies(request?: IncomingMessage) {
   if (isClientSide()) {
     if (!document.cookie) {
       return {};

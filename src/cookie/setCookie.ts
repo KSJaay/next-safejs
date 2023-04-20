@@ -1,25 +1,22 @@
-import {IncomingMessage, ServerResponse} from "http";
 import getCookies from "./getCookies";
 import {isClientSide} from "./utils";
-import {CookieAttributes} from "../typings/cookie";
+import {SetCookie} from "../typings/cookie";
 import serialize from "./serialize";
 
-function stringify(data: any) {
-  try {
+const stringfy = (data: any) => {
+  if (typeof data === "object") {
     return JSON.stringify(data);
-  } catch (e) {
-    return data;
   }
-}
 
-function setCookie(
-  name: string,
-  data: any,
-  options: CookieAttributes,
-  request: IncomingMessage | undefined,
-  response: ServerResponse | undefined
-) {
-  const serializedCookie = serialize(name, stringify(data), options);
+  return data;
+};
+
+function setCookie({key, data, options, request, response}: SetCookie) {
+  const serializedCookie = serialize({
+    name: key,
+    val: data,
+    options,
+  });
 
   if (isClientSide()) {
     document.cookie = serializedCookie;
@@ -29,15 +26,18 @@ function setCookie(
   if (!request) throw new Error("request is undefined");
   if (!response) throw new Error("response is undefined");
 
-  const cookies = getCookies(request);
-  if (!data) {
-    delete cookies[name];
-  } else {
-    cookies[name] = serializedCookie;
+  let currentCookies = response.getHeader("Set-Cookie");
+
+  if (!Array.isArray(currentCookies)) {
+    currentCookies = !currentCookies ? [] : [String(currentCookies)];
   }
+  response.setHeader("Set-Cookie", currentCookies.concat(serializedCookie));
+
+  const cookies = getCookies(request);
+  !data ? delete cookies[key] : (cookies[key] = stringfy(data));
 
   const cookiesAsSrting = Object.entries(cookies).reduce((accum, item) => {
-    return accum.concat(`${item[0]}=${item[1]};`);
+    return item[0] ? accum.concat(`${item[0]}=${item[1]};`) : accum;
   }, "");
 
   response.setHeader("Set-Cookie", [cookiesAsSrting]);
