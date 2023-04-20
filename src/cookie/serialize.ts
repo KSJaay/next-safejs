@@ -1,6 +1,6 @@
-import {CookieAttributes} from "../typings/cookie";
+import {Serialize} from "../typings/cookie";
 
-function serialize(name: string, val: any, options: CookieAttributes) {
+function serialize({name, val, options}: Serialize) {
   const opt = options || {};
 
   const enc = opt.encode || encodeURIComponent;

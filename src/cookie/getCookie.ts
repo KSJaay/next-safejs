@@ -1,10 +1,10 @@
-import {IncomingMessage} from "http";
+import {GetCookie} from "../typings/cookie";
 import getCookies from "./getCookies";
 
-function getCookie(request: IncomingMessage | undefined, name: string) {
+function getCookie({request, key}: GetCookie) {
   const cookies = getCookies(request);
 
-  return cookies[name];
+  return cookies[key];
 }
 
 export default getCookie;

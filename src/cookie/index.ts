@@ -10,7 +10,7 @@ export * from "./getCookies";
 export {default as getMultipleCookies} from "./getMultipleCookies";
 export * from "./getMultipleCookies";
 
-export {default as CookeOptions} from "./options";
+export {default as cookieOptions} from "./options";
 export * from "./options";
 
 export {default as removeCookie} from "./removeCookie";

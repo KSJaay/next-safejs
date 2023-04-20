@@ -1,7 +1,7 @@
 import {IncomingMessage} from "http";
 import getCookies from "./getCookies";
 
-function getCookieKeys(request: IncomingMessage | undefined) {
+function getCookieKeys(request?: IncomingMessage) {
   const cookies = getCookies(request);
 
   return Object.keys(cookies);

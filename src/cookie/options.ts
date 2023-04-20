@@ -1,9 +1,6 @@
-import {CookieAttributes} from "../typings/cookie";
+import {SideCookieOptions} from "../typings/cookie";
 
-const clientSideCookieOptions = (
-  options: CookieAttributes | undefined = {},
-  hostname?: string | undefined
-) => {
+const clientSideCookieOptions = ({options, hostname}: SideCookieOptions) => {
   const baseURL = hostname || process.env.NEXT_PUBLIC_BASE_URL;
   if (!baseURL) throw new Error("Provide a valid url");
 
@@ -12,15 +9,11 @@ const clientSideCookieOptions = (
     domain: baseURL,
     httpOnly: false,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
     ...options,
   };
 };
 
-const serverSideCookieOptions = (
-  options: CookieAttributes | undefined = {},
-  hostname?: string | undefined
-) => {
+const serverSideCookieOptions = ({options, hostname}: SideCookieOptions) => {
   const baseURL = hostname || process.env.NEXT_PUBLIC_BASE_URL;
   if (!baseURL) throw new Error("Provide a valid url");
 
@@ -29,7 +22,6 @@ const serverSideCookieOptions = (
     domain: baseURL,
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
     ...options,
   };
 };
