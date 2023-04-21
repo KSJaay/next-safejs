@@ -1,8 +1,8 @@
 {
   "name": "next-safejs",
-  "version": "1.0.2",
+  "version": "1.0.0-beta.2",
   "description": "🔒 Next-safejs provides various methods to secure your Nextjs applications",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc",
     "build:watch": "rimraf ./dist && tsc -w",
