@@ -5,22 +5,11 @@ import {
   getCookies,
   getMultipleCookies,
   removeCookie,
-  serialize,
   setCookie,
   Utils,
-} from "./cookie";
+} from './cookie';
 
-export {
-  cookieOptions,
-  getCookie,
-  getCookieKeys,
-  getCookies,
-  getMultipleCookies,
-  removeCookie,
-  serialize,
-  setCookie,
-  Utils,
-};
+export { cookieOptions, getCookie, getCookieKeys, getCookies, getMultipleCookies, removeCookie, setCookie, Utils };
 
 export default {
   cookie: {
@@ -30,7 +19,7 @@ export default {
     getCookies,
     getMultipleCookies,
     removeCookie,
-    serialize,
+
     setCookie,
     Utils,
   },

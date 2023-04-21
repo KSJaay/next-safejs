@@ -1,10 +1,10 @@
-import {createRequest, createResponse} from "../requests";
-import {removeCookie, Utils} from "../../src";
+import { createRequest, createResponse } from '../requests';
+import { removeCookie, Utils } from '../../src';
 
-jest.mock("../../src/cookie/utils.ts");
+jest.mock('../../src/cookie/utils.ts');
 
-describe("removeCookie", () => {
-  describe("Server Side", () => {
+describe('removeCookie', () => {
+  describe('Server Side', () => {
     beforeEach(() => {
       (Utils.isClientSide as jest.Mock).mockReturnValue(false);
     });
@@ -13,18 +13,18 @@ describe("removeCookie", () => {
       jest.resetAllMocks();
     });
 
-    it("should return an empty string", () => {
+    it('should return an empty string', () => {
       const request = createRequest();
       const response = createResponse();
-      request.headers.cookie = "test=panda; panda=test";
+      request.headers.cookie = 'test=panda;panda=test';
 
-      removeCookie({key: "test", request, response});
+      removeCookie({ key: 'test', request, response });
 
-      expect(request.headers.cookie).toEqual("panda=test;");
+      expect(request.headers.cookie).toEqual('panda=test;');
     });
   });
 
-  describe("Client Side", () => {
+  describe('Client Side', () => {
     beforeEach(() => {
       (Utils.isClientSide as jest.Mock).mockReturnValue(true);
     });
@@ -33,15 +33,15 @@ describe("removeCookie", () => {
       jest.resetAllMocks();
     });
 
-    it("should return an empty string", () => {
-      Object.defineProperty(document, "cookie", {
+    it('should return an empty string', () => {
+      Object.defineProperty(document, 'cookie', {
         writable: true,
-        value: "test=panda; panda=test",
+        value: 'test=panda; panda=test',
       });
 
-      removeCookie({key: "test"});
+      removeCookie({ key: 'test' });
 
-      expect(document.cookie).toEqual("test=; Max-Age=-1");
+      expect(document.cookie).toEqual('test=; Max-Age=-1; Path=/');
     });
   });
 });

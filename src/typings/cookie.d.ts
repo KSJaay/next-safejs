@@ -1,11 +1,13 @@
-import {IncomingMessage, ServerResponse} from "http";
+import { IncomingMessage, ServerResponse } from 'http';
 export interface CookieAttributes {
-  path?: string;
-  domain?: string;
-  expires?: Date;
-  sameSite?: "strict" | "Strict" | "lax" | "Lax" | "none" | "None" | true;
-  secure?: boolean;
-  [property: string]: any;
+  path?: string | undefined;
+  domain?: string | undefined;
+  expires?: Date | undefined;
+  sameSite?: true | false | 'lax' | 'strict' | 'none' | undefined;
+  secure?: boolean | undefined;
+  maxAge?: number | undefined;
+  httpOnly?: boolean | undefined;
+  [property: string]: any | undefined;
 }
 
 export interface GetCookie {
@@ -37,7 +39,7 @@ export interface Serialize {
 
 export interface SetCookie {
   key: string;
-  data: any;
+  data?: any;
   options?: CookieAttributes;
   request?: IncomingMessage;
   response?: ServerResponse;

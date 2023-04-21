@@ -1,11 +1,10 @@
-import {RemoveCookie} from "../typings/cookie";
-import setCookie from "./setCookie";
+import { RemoveCookie } from '../typings/cookie';
+import setCookie from './setCookie';
 
-function removeCookie({key, request, response}: RemoveCookie) {
+function removeCookie({ key, request, response }: RemoveCookie) {
   setCookie({
     key,
-    data: "",
-    options: {maxAge: -1},
+    options: { maxAge: -1 },
     request,
     response,
   });

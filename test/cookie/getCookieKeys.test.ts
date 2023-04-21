@@ -1,10 +1,10 @@
-import {createRequest} from "../requests";
-import {getCookieKeys, Utils} from "../../src";
+import { createRequest } from '../requests';
+import { getCookieKeys, Utils } from '../../src';
 
-jest.mock("../../src/cookie/utils.ts");
+jest.mock('../../src/cookie/utils.ts');
 
-describe("getCookie", () => {
-  describe("Server Side", () => {
+describe('getCookie', () => {
+  describe('Server Side', () => {
     beforeEach(() => {
       (Utils.isClientSide as jest.Mock).mockReturnValue(false);
     });
@@ -13,7 +13,7 @@ describe("getCookie", () => {
       jest.resetAllMocks();
     });
 
-    it("should return an empty array if no cookie header is present", () => {
+    it('should return an empty array if no cookie header is present', () => {
       const request = createRequest();
 
       const result = getCookieKeys(request);
@@ -21,17 +21,17 @@ describe("getCookie", () => {
       expect(result).toEqual([]);
     });
 
-    it("should return an array of cookie keys", () => {
+    it('should return an array of cookie keys', () => {
       const request = createRequest();
-      request.headers.cookie = "test=panda; panda=test";
+      request.headers.cookie = 'test=panda;panda=test';
 
       const result = getCookieKeys(request);
 
-      expect(result).toEqual(["test", "panda"]);
+      expect(result).toEqual(['test', 'panda']);
     });
   });
 
-  describe("Client Side", () => {
+  describe('Client Side', () => {
     beforeEach(() => {
       (Utils.isClientSide as jest.Mock).mockReturnValue(true);
     });
@@ -40,21 +40,21 @@ describe("getCookie", () => {
       jest.resetAllMocks();
     });
 
-    it("should return an empty array if no cookie header is present", () => {
+    it('should return an empty array if no cookie header is present', () => {
       const result = getCookieKeys();
 
       expect(result).toEqual([]);
     });
 
-    it("should return an array of cookie keys", () => {
-      Object.defineProperty(document, "cookie", {
+    it('should return an array of cookie keys', () => {
+      Object.defineProperty(document, 'cookie', {
         writable: true,
-        value: "test=panda; panda=test",
+        value: 'test=panda; panda=test',
       });
 
       const result = getCookieKeys();
 
-      expect(result).toEqual(["test", "panda"]);
+      expect(result).toEqual(['test', 'panda']);
     });
   });
 });

@@ -1,29 +1,29 @@
-import {SideCookieOptions} from "../typings/cookie";
+import { SideCookieOptions } from '../typings/cookie';
 
-const clientSideCookieOptions = ({options, hostname}: SideCookieOptions) => {
+const clientSideCookieOptions = ({ options, hostname }: SideCookieOptions) => {
   const baseURL = hostname || process.env.NEXT_PUBLIC_BASE_URL;
-  if (!baseURL) throw new Error("Provide a valid url");
+  if (!baseURL) throw new Error('Provide a valid url');
 
   return {
-    path: "/",
+    path: '/',
     domain: baseURL,
     httpOnly: false,
-    sameSite: "lax",
+    sameSite: 'lax',
     ...options,
   };
 };
 
-const serverSideCookieOptions = ({options, hostname}: SideCookieOptions) => {
+const serverSideCookieOptions = ({ options, hostname }: SideCookieOptions) => {
   const baseURL = hostname || process.env.NEXT_PUBLIC_BASE_URL;
-  if (!baseURL) throw new Error("Provide a valid url");
+  if (!baseURL) throw new Error('Provide a valid url');
 
   return {
-    path: "/",
+    path: '/',
     domain: baseURL,
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: 'lax',
     ...options,
   };
 };
 
-export default {clientSideCookieOptions, serverSideCookieOptions};
+export default { clientSideCookieOptions, serverSideCookieOptions };

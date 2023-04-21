@@ -1,7 +1,7 @@
-import {GetCookie} from "../typings/cookie";
-import getCookies from "./getCookies";
+import { GetCookie } from '../typings/cookie';
+import getCookies from './getCookies';
 
-function getCookie({request, key}: GetCookie) {
+function getCookie({ request, key }: GetCookie) {
   const cookies = getCookies(request);
 
   return cookies[key];

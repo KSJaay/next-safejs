@@ -1,10 +1,10 @@
-import {createRequest, createResponse} from "../requests";
-import {setCookie, Utils} from "../../src";
+import { createRequest, createResponse } from '../requests';
+import { setCookie, Utils } from '../../src';
 
-jest.mock("../../src/cookie/utils.ts");
+jest.mock('../../src/cookie/utils.ts');
 
-describe("setCookie", () => {
-  describe("Server Side", () => {
+describe('setCookie', () => {
+  describe('Server Side', () => {
     beforeEach(() => {
       (Utils.isClientSide as jest.Mock).mockReturnValue(false);
     });
@@ -13,24 +13,24 @@ describe("setCookie", () => {
       jest.resetAllMocks();
     });
 
-    it("should set cookie on headers and response", () => {
+    it('should set cookie on headers and response', () => {
       const request = createRequest();
       const response = createResponse();
-      request.headers.cookie = "";
+      request.headers.cookie = ' ';
 
       setCookie({
-        key: "dance",
-        data: "panda",
+        key: 'dance',
+        data: 'panda',
         request,
         response,
       });
 
-      expect(request.headers.cookie).toEqual("dance=panda;");
-      expect(response.getHeader("Set-Cookie")).toEqual(["dance=panda;"]);
+      expect(request.headers.cookie).toEqual('dance=panda;');
+      expect(response.getHeader('Set-Cookie')).toEqual(['dance=panda; Path=/']);
     });
   });
 
-  describe("Client Side", () => {
+  describe('Client Side', () => {
     beforeEach(() => {
       (Utils.isClientSide as jest.Mock).mockReturnValue(true);
     });
@@ -39,18 +39,18 @@ describe("setCookie", () => {
       jest.resetAllMocks();
     });
 
-    it("should set cookie on headers and response", () => {
-      Object.defineProperty(document, "cookie", {
+    it('should set cookie on headers and response', () => {
+      Object.defineProperty(document, 'cookie', {
         writable: true,
-        value: "",
+        value: '',
       });
 
       setCookie({
-        key: "dance",
-        data: "panda",
+        key: 'dance',
+        data: 'panda',
       });
 
-      expect(document.cookie).toEqual("dance=panda");
+      expect(document.cookie).toEqual('dance=panda; Path=/');
     });
   });
 });

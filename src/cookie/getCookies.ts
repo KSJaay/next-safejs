@@ -1,23 +1,33 @@
-import {IncomingMessage} from "http";
-import {isClientSide} from "./utils";
+import { IncomingMessage } from 'http';
+import { isClientSide } from './utils';
+import { parse } from 'cookie';
 
-export function parseCookies(cookies: string) {
-  const cookiesArray = cookies.split("; ") || [];
+export function parseDocCookies(cookies: string, decode?: any) {
+  const decodeString = decode || dec;
+  const cookiesArray = cookies.split('; ') || [];
 
   const cookiesObject: {
     [key: string]: any;
   } = {};
 
   for (const cookie of cookiesArray) {
-    const [key, v] = cookie.trim().split("=");
+    const [key, v] = cookie.trim().split('=');
     try {
-      cookiesObject[key] = decodeURIComponent(v);
+      if (!cookiesObject[key]) cookiesObject[key] = decodeString(v);
     } catch (e) {
-      cookiesObject[key] = v;
+      if (!cookiesObject[key]) cookiesObject[key] = v;
     }
   }
 
   return cookiesObject;
+}
+
+function dec(value: string) {
+  try {
+    return decodeURIComponent(value);
+  } catch (e) {
+    return value;
+  }
 }
 
 function getCookies(request?: IncomingMessage) {
@@ -26,14 +36,14 @@ function getCookies(request?: IncomingMessage) {
       return {};
     }
 
-    return parseCookies(document.cookie);
+    return parseDocCookies(document.cookie);
   }
 
   if (!request?.headers?.cookie) {
     return {};
   }
 
-  return parseCookies(request.headers.cookie);
+  return parse(request.headers.cookie);
 }
 
 export default getCookies;
