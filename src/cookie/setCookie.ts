@@ -1,20 +1,27 @@
 import getCookies from './getCookies';
 import { isClientSide } from './utils';
-import { SetCookie } from '../typings/cookie';
+import { CookieAttributes } from '../typings/cookie';
 import { serialize } from 'cookie';
+import { IncomingMessage, ServerResponse } from 'http';
 
 const stringfy = (data: any) => {
   try {
     if (typeof data === 'object') {
       return JSON.stringify(data);
     }
-    return data;
+    return data || '';
   } catch (e) {
-    return data;
+    return data || '';
   }
 };
 
-function setCookie({ key, data = '', options = {}, request, response }: SetCookie) {
+function setCookie(
+  key: string,
+  data: any = '',
+  options: CookieAttributes = {},
+  request?: IncomingMessage,
+  response?: ServerResponse,
+) {
   if (!key) throw new Error('key is undefined');
 
   const serializedCookie = serialize(key, stringfy(data), { path: '/', ...options });

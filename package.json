@@ -1,17 +1,25 @@
 {
   "name": "next-safejs",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.10",
   "description": "🔒 Next-safejs provides various methods to secure your Nextjs applications",
-  "main": "index.js",
+  "main": "/dist/index.js",
+  "files": [
+    "dist/*",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "rimraf ./dist && tsc",
+    "build": "tsc",
     "build:watch": "rimraf ./dist && tsc -w",
     "clean": "rimraf ./dist",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
     "test": "jest --maxWorkers=50%",
     "test:coverage": "jest --coverage",
-    "prepare": "npm run clean && npm run format && npm run lint",
     "watch": "npx nodemon"
   },
   "repository": {

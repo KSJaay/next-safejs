@@ -18,7 +18,7 @@ describe('getCookie', () => {
       const request = createRequest();
       request.headers.cookie = 'panda=test';
 
-      const result = getCookie({ request, key: 'test' });
+      const result = getCookie('test', request);
       expect(result).toBeUndefined();
     });
 
@@ -26,7 +26,7 @@ describe('getCookie', () => {
       const request = createRequest();
       request.headers.cookie = 'test=panda;panda=test';
 
-      const result = getCookie({ request, key: 'test' });
+      const result = getCookie('test', request);
 
       expect(result).toEqual('panda');
     });
@@ -47,7 +47,7 @@ describe('getCookie', () => {
         value: 'panda=test',
       });
 
-      const result = getCookie({ key: 'test' });
+      const result = getCookie('test');
       expect(result).toBeUndefined();
     });
 
@@ -57,7 +57,7 @@ describe('getCookie', () => {
         value: 'test=panda; panda=test',
       });
 
-      const result = getCookie({ key: 'test' });
+      const result = getCookie('test');
 
       expect(result).toEqual('panda');
     });

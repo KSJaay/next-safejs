@@ -18,12 +18,7 @@ describe('setCookie', () => {
       const response = createResponse();
       request.headers.cookie = ' ';
 
-      setCookie({
-        key: 'dance',
-        data: 'panda',
-        request,
-        response,
-      });
+      setCookie('dance', 'panda', {}, request, response);
 
       expect(request.headers.cookie).toEqual('dance=panda;');
       expect(response.getHeader('Set-Cookie')).toEqual(['dance=panda; Path=/']);
@@ -45,10 +40,7 @@ describe('setCookie', () => {
         value: '',
       });
 
-      setCookie({
-        key: 'dance',
-        data: 'panda',
-      });
+      setCookie('dance', 'panda');
 
       expect(document.cookie).toEqual('dance=panda; Path=/');
     });

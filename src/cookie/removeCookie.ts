@@ -1,13 +1,8 @@
-import { RemoveCookie } from '../typings/cookie';
+import { IncomingMessage, ServerResponse } from 'http';
 import setCookie from './setCookie';
 
-function removeCookie({ key, request, response }: RemoveCookie) {
-  setCookie({
-    key,
-    options: { maxAge: -1 },
-    request,
-    response,
-  });
+function removeCookie(key: string, request?: IncomingMessage, response?: ServerResponse) {
+  setCookie(key, '', { maxAge: -1 }, request, response);
 }
 
 export default removeCookie;

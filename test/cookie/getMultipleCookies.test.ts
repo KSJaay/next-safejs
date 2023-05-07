@@ -16,7 +16,7 @@ describe('getMultipleCookies', () => {
     it('should return an empty object', () => {
       const request = createRequest();
 
-      const result = getMultipleCookies({ request, keys: ['test', 'panda'] });
+      const result = getMultipleCookies(['test', 'panda'], request);
 
       expect(result).toEqual({});
     });
@@ -25,7 +25,7 @@ describe('getMultipleCookies', () => {
       const request = createRequest();
       request.headers.cookie = 'test=panda;panda=test';
 
-      const result = getMultipleCookies({ request, keys: ['test', 'panda'] });
+      const result = getMultipleCookies(['test', 'panda'], request);
 
       expect(result).toEqual({ test: 'panda', panda: 'test' });
     });
@@ -41,7 +41,7 @@ describe('getMultipleCookies', () => {
     });
 
     it('should return an empty object', () => {
-      const result = getMultipleCookies({ keys: ['test', 'panda'] });
+      const result = getMultipleCookies(['test', 'panda']);
 
       expect(result).toEqual({});
     });
@@ -52,7 +52,7 @@ describe('getMultipleCookies', () => {
         value: 'test=panda; panda=test',
       });
 
-      const result = getMultipleCookies({ keys: ['test', 'panda'] });
+      const result = getMultipleCookies(['test', 'panda']);
 
       expect(result).toEqual({ test: 'panda', panda: 'test' });
     });

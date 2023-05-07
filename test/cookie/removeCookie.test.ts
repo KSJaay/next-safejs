@@ -18,7 +18,7 @@ describe('removeCookie', () => {
       const response = createResponse();
       request.headers.cookie = 'test=panda;panda=test';
 
-      removeCookie({ key: 'test', request, response });
+      removeCookie('test', request, response);
 
       expect(request.headers.cookie).toEqual('panda=test;');
     });
@@ -39,7 +39,7 @@ describe('removeCookie', () => {
         value: 'test=panda; panda=test',
       });
 
-      removeCookie({ key: 'test' });
+      removeCookie('test');
 
       expect(document.cookie).toEqual('test=; Max-Age=-1; Path=/');
     });

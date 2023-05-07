@@ -1,7 +1,7 @@
-import { GetMultipleCookies } from '../typings/cookie';
+import { IncomingMessage } from 'http';
 import getCookies from './getCookies';
 
-function getMultipleCookies({ request, keys }: GetMultipleCookies) {
+function getMultipleCookies(keys: string[], request?: IncomingMessage) {
   const cookies = getCookies(request);
 
   return keys.reduce((acc: any, name: string) => {
