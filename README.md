@@ -19,14 +19,14 @@ Next-safejs is a library focused on creating various methods to secure your Next
 
 
 ### In Progress ⌛️
-- Cookies
+- jose
 
 ### Done ✅
+- Cookies
 
 ### Planned 🚀
 - csrf
 - jwt
-- jose
 - themes
 
 ## Contributing
